@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="mainDiv">
+      <div class="pageTitle">
+        <h2>Grocery Market</h2>
+        
+      </div>
+      <div class="dropDownRight">
+        <div class="dropdown">
+            <button class="dropbtn">Category</button>
+            <div class="dropdown-content">
+              <a (click)="loadCategory(0, 'Products')">All Products</a>
+              <a (click)="loadCategory(1, 'Vegetables')">Vegetables</a>
+              <a (click)="loadCategory(2, 'Pulses')">Pulses</a>
+              <a (click)="loadCategory(3, 'Spices')">Spices</a>
+              <a (click)="loadCategory(4, 'Snacks')">Snacks & Dryfruits</a>
+            </div>
+          </div>
+        </div>
+        
+      <div class="searcBar">
+        <input class="searchInput" type="text" placeholder="search product">
+        <button class="addToCart" (click)="gotoCart()">Cart {{cartNumber}}</button>
+      </div>
+      <div class="dropDownLeft">
+        <div class="dropdown" *ngIf="!user && !isLogin">
+          <button class="dropbtn">Login</button>
+          <div class="dropdown-content">
+            <a (click)="goToLogin('user')">User Login</a>
+            <a (click)="goToLogin('admin')">Employee Login</a>
+          </div>
+        </div>
+<!-- OAUTH 2 -->
+        <div class="dropdown" *ngIf="user">
+          <button class="dropbtnUser">
+            <img
+              *ngIf="user.photoUrl"
+              class="userImg"
+              src="{{ user.photoUrl }}"
+            />
+            {{ user.name }}
+          </button>
+          <div class="dropdown-content">
+            <a href="/user">My Profile</a>
+            <a (click)="signOut()">Logout</a>
+          </div>
+        </div>
+<!-- LOCAL STORAGE -->
+        <div class="dropdown" *ngIf="isLogin">
+          <button class="dropbtnUser">
+            {{ localName.name }}
+          </button>
+          <div class="dropdown-content">
+            <a href="/user">My Profile</a>
+            <a (click)="logout()">Logout</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="pagination">
+      <a (click)="decrementPag()">&laquo;</a>
+      <a >{{pagCounter}}</a>
+      <a (click)="incrementPag()">&raquo;</a>
+    </div>
+
+    
+
+    <!-- PRODUCT LIST -->
+    <div class="productList" *ngFor ="let product of products; let i = index">   
+      <div class="gallery">
+      <a >
+        <img src={{product.product_img}}  >
+      </a>
+      <div class="productName">
+       <span class="pname">{{product.product_name}}</span>  <span class="productPrice">€   {{product.price}}</span>
+        <p>{{product.weight}} {{product.unit}}  €   {{product.price}}  <button  class="btn1" (click)="addToCart(product,i)">Add</button> <span class="itemAdded" *ngIf="show===i">Added !!</span></p>  
+      </div>  
+    </div>
+  </div>
+
+ 
+
+   
+  <button class="chat" *ngIf="isLogin">
+    <a href={{chatLink}}>+</a></button>
+  </body>
+  <footer>
+
+  </footer>
+</html>

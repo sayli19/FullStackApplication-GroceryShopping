@@ -1,0 +1,104 @@
+
+GET http://localhost:5000/getUsers
+
+###
+
+POST http://localhost:5000/users 
+Content-Type: application/json
+
+{
+"name": "qwerty", "password": "qwerty"
+}
+
+###
+
+POST http://localhost:5000/users/login 
+Content-Type: application/json
+
+{
+"name": "qwerty", "password": "qwerty"
+}
+
+###
+
+
+GET http://localhost:5000/findAll
+
+###
+
+GET http://localhost:5000/users
+
+###
+
+POST http://localhost:5000/userstest 
+Content-Type: application/json
+
+{
+"name": "Kyle", "password": "password"
+}
+
+###
+
+POST http://localhost:5000/users/logintest 
+Content-Type: application/json
+
+{
+"name": "Kyle", "password": "password"
+}
+
+###
+
+POST http://localhost:5000/admin/addproducts 
+Content-Type: application/json
+
+{
+"product_name": "Kidney beans", 
+"brand_id": "1",
+"category_id": "1",
+"expiry_date": "21-04-2022",
+"weight": "500",
+"unit": "grams",
+"price": "6",
+"product_img": "../../../assets/tomato.jpg",
+"quantity": "1",
+"total": "6"
+
+}
+
+###
+
+POST http://localhost:5000/admin/editproducts 
+Content-Type: application/json
+
+{
+"product_id": "15",
+"product_name": "Kidney", 
+"brand_id": "1",
+"category_id": "1",
+"expiry_date": "21-04-2023",
+"weight": "600",
+"unit": "gram",
+"price": "7",
+"product_img": "../../../assets/tomato.jpg",
+"quantity": "1",
+"total": "7"
+
+}
+
+###
+
+GET http://localhost:5000/admin/deleteproducts 
+Content-Type: application/json
+
+{
+"product_id": "15"
+}
+
+###
+
+GET http://localhost:5000/user/viewProductsByCategory 
+Content-Type: application/json
+
+{
+"category_id": "2"
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  
+<div class="loginDiv" id="loginDiv" *ngIf="!isReg">
+	<div class="loginForm signUpDiv">
+		<form action="#">
+			<h1>Create Account</h1>
+			<div class="oauthLoginIcons">
+				<a href="#" class="loginIcons"><i class="fab fa-facebook-f"></i></a>
+				<a class="loginIcons"><i class="fab fa-google-plus-g"></i>G</a>
+				<a href="#" class="loginIcons"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+			<span>or use your email for registration</span>
+			<input type="text" placeholder="Name" />
+			<input type="email" placeholder="Email" />
+			<input type="password" placeholder="Password" />
+			<button>Sign Up</button>
+		</form>
+	</div>
+	<div class="loginForm signInDiv">
+		<form #myform = "ngForm" (ngSubmit) = "onSubmit(myform)">
+			<h1>Sign in</h1>
+			<div class="oauthLoginIcons">
+				<a class="loginIcons" (click)="signInWithGoogle()"><i class="fa fa-google-plus-circle">G</i></a>
+				<a  class="loginIcons"><i class="fa fa-google-plus-circle"></i></a>
+				<a class="loginIcons"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+			<span>or use your account</span>
+			<input type="email" placeholder="Email" name = "username" placeholder = "Username" ngModel/>
+			<input type="password" placeholder="Password" name = "password" placeholder = "Password" ngModel />
+			<a >Forgot your password?</a>
+			<button type = "submit" value = "Login" >Sign In</button>
+		</form>
+				
+	</div>
+	<div class="contentText">
+		<div class="contentDiv">
+			
+			<div class="signUpText signUpTextFloat">
+				<h1>Hello, Friend!</h1>
+				<p>Enter your personal details and start journey with us</p>
+				<button (click)="showReg()" class="signInButton" id="signUp">Sign Up</button>
+			</div>
+		</div>
+	</div>
+
+
+
+
+</div>
+
+<!-- SIGN UP FORM -->
+
+<div *ngIf="isReg">
+
+	<form #myform1 = "ngForm" (ngSubmit) = "onSubmitRegistration(myform1)" >
+		<div class="register">
+			<h1>Create Account</h1>
+			<input type = "text" name = "fname" placeholder = "First name" ngModel>
+			<input type = "text" name = "lname" placeholder = "Last name" ngModel>
+			<input type = "phone" name = "phone" placeholder = "Phone" ngModel>
+			<input type = "email" name = "email" placeholder = "Email" ngModel>
+			<input type = "text" name = "street" placeholder = "Street" ngModel>
+			<input type = "text" name = "city" placeholder = "City" ngModel>
+			<input type = "number" name = "pincode" placeholder = "Pincode" ngModel>
+			<input type = "password" name = "password" placeholder = "Password" ngModel>
+			<input type = "password" name = "cpassword" placeholder = "Confirm password" ngModel>
+			
+
+			<button (click)="showReg()">Go to Login</button>
+			<input type = "submit" class="regisBtn" value = "REGISTER" >
+		</div>
+	
+	</form>
+</div>
+
+<div *ngIf = 'this.isLogin'>
+	<h1>You are logged in</h1>
+	<button class = 'btn btn-outline-info' (click) = 'logout()'>Log-out</button>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<div class="shopping-cart">
+    <!-- Title -->
+    <div class="title">
+      My Cart <span  *ngIf="sum"class="totalPrice">Total : {{sum}}</span> 
+    </div>
+   
+    <!-- Product #1 -->
+    <div class="item"  *ngFor="let item of cart; let i = index">
+      <div class="buttons">
+        <span class="delete-btn"></span>
+        <span class="like-btn"></span>
+      </div>
+   
+      <div>
+        <img class="image" src={{item.product_img}}  />
+      </div>
+   
+      <div class="description">
+        <span>{{item.product_name}}</span>
+        <span>{{item.weight}} {{item.unit}}</span>
+      
+      </div>
+   
+      <div class="quantity">
+        <button (click) = "deleteItem(item,i)" class="plus-btn" type="button" name="button">
+          -
+        </button>
+        <input  type="text" name="name" value={{item.quantity}}>
+        <button (click) = "addItem(item,i)" class="minus-btn" type="button" name="button">
+        +
+        </button>
+      </div>
+   
+      <div class="total-price"> {{item.price * item.quantity}} € </div>
+
+      <div class="del"><button (click) = "removeItem(item,i)" class="delete">Delete</button></div>
+    </div>
+   
+    <div class="item1" >
+      <div class="checkOutPrice">  
+          <p> Total  {{sum}} €</p><br>
+          <p> Tax  {{tax}} € </p> <br>
+          <p> Grand Total  {{sum + tax}} € </p> 
+        </div>
+    </div>
+
+
+    <div class="title">
+     Confirm address
+    </div>
+
+    <div class="item">
+      <table id="customers">
+        <th>Name</th>
+          <th>Last Name</th>
+              <th>Contact</th>
+          <th>Street</th>
+          <th>City</th>
+          <th>pin code</th>
+
+          <tr *ngIf="userPersonalDetails">
+            <td><form><input type="text" class="editProduct" [(ngModel)]="userPersonalDetails.user_fname" name="fname" ></form></td>
+            <td><form><input type="text" class="editProduct" [(ngModel)]="userPersonalDetails.user_lname" name="lname"></form></td>
+            <td><form><input type="text" class="editProduct" [(ngModel)]="userPersonalDetails.user_contact" name="contact"></form></td>
+            <td><form><input type="text" class="editProduct" [(ngModel)]="userPersonalDetails.short_address" name="street"></form></td>
+            <td><form><input type="text" class="editProduct" [(ngModel)]="userPersonalDetails.city" name="city"></form></td>
+            <td><form><input type="text" class="editProduct" [(ngModel)]="userPersonalDetails.pin_code" name="pin"></form></td>
+          </tr>
+      </table>
+  
+    </div>
+
+
+
+    <button class="checkoutBtn" (click)="postInOrders()">Proceed to pay</button>
+
+    
+  </div>

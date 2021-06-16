@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       
+        </script>
+
+<div class="tab">
+    <button class="tablinks" (click)="openCity($event, 'orders')" #defaultOpen>All orders</button>
+    <button class="tablinks" (click)="openCity($event, 'products')">All Products</button>
+   
+  </div>
+  <!-- ORDERS -->
+  <div id="orders" class="tabcontent" style="display: none;">
+    <h3>Orders</h3>
+    <div class="pagination">
+      <a (click)="decrementOrder()">&laquo;</a>
+      <a >{{orderCounter}}</a>
+      <a (click)="incrementOrder()">&raquo;</a>
+    </div>
+    <table id="customers">
+        <tr>
+          <th>Order by</th>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Address</th>
+        </tr>
+        <tr *ngFor="let item of allOrders">
+          <td>{{item.user_fname}} {{item.user_lname}}</td>
+          <td>{{item.product_name}}</td>
+          <td>{{item.quantity}}</td>
+          <td>{{item.price}}</td>
+          <td>{{item.short_address}}, {{item.city}}, {{item.pin_code}}</td>
+        </tr>
+      </table>
+  </div>
+  
+  <div id="products" class="tabcontent" >
+    <!-- <h3>Products</h3> -->
+
+  <span class="prod">All Products / {{prdName}}</span>  
+  <button class="addProd" (click)="addProduct()">Add Product</button>
+  <div class="pagination">
+    <a (click)="decrementPag()">&laquo;</a>
+    <a >{{pagCounter}}</a>
+    <a (click)="incrementPag()">&raquo;</a>
+  </div>
+    <div class="dropDownLeft">
+    <div class="dropdown">
+        <button class="dropbtn">Category</button>
+      
+        <div class="dropdown-content">
+          <a (click)="loadCategory(0, 'Products')">All Products</a>
+          <a (click)="loadCategory(1, 'Vegetables')">Vegetables</a>
+          <a (click)="loadCategory(2, 'Pulses')">Pulses</a>
+          <a (click)="loadCategory(3, 'Spices')">Spices</a>
+          <a (click)="loadCategory(4, 'Snacks')">Snacks & Dryfruits</a>
+        </div>
+      </div>
+    </div>
+
+    <table id="customers" *ngIf="addProd == false">
+        <tr>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <tr *ngFor="let item of filteredProducts; let i = index">
+          <td><form><input type="text" class="editProduct" [(ngModel)]="item.product_name" name="productName" ></form></td>
+          <td><form><input type="text" class="editProduct" [(ngModel)]="item.weight" name="productWeight"></form>
+            <form><input type="text" class="editProduct" [(ngModel)]="item.unit" name="productUnit"></form></td>
+          <td><form><input type="text" class="editProduct" [(ngModel)]="item.price" name="productUnit"></form></td>
+          <td><button (click)="updateProduct(item, i)" class="btn">save</button></td>
+          <td><button (click)="deleteProduct(item, i)" class="btn">delete</button></td>
+        </tr>
+
+       
+      </table>
+
+      <!-- ADD PRODUCT -->
+
+      <table id="customers" *ngIf="addProd == true">
+        <tr>
+          <th>Product name</th>
+          <th>Brand ID</th>
+          <th>Category ID</th>
+          <th>Weight</th>
+          <th>Unit</th>
+          <th>Price</th>
+          <th>Product Image</th>
+          <th>Save</th>
+        </tr>
+        <tr>
+          <td><form><input type="text" class="editProduct" [(ngModel)]="pName" name="pName" ></form></td>
+          <td><form><input type="text" class="editProduct" [(ngModel)]="brandId" name="brandId" ></form></td>
+          <td><form><input type="text" class="editProduct" [(ngModel)]="cID" name="cID" ></form></td>
+          <td><form><input type="text" class="editProduct" [(ngModel)]="pweight" name="pweight" ></form></td>
+          <td><form><input type="text" class="editProduct" [(ngModel)]="pUnit" name="pUnit" ></form></td>
+          <td><form><input type="text" class="editProduct" [(ngModel)]="pprice" name="pprice" ></form></td>
+          <td><form><input type="text" class="editProduct" [(ngModel)]="pImg" name="pImg" ></form></td>
+          <td><button (click)="createProduct()" class="btn">Save</button></td>
+        </tr> 
+      </table>
+
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <table id="brandTable" *ngIf="addProd == true">
+        Dear Admin, Please use the following table for your reference <br><br>
+        <tr>
+          <th>Brand ID</th>
+          <th>Brand Name</th>
+        </tr>
+        <tr *ngFor="let item of brand">
+          <td>{{item.brand_id}}</td>
+          <td>{{item.brand_name}}</td>
+        </tr> 
+       
+      </table>
+
+      <table id="brandTable" *ngIf="addProd == true">
+        <tr>
+          <th>Category ID</th>
+          <th>Category Name</th>
+        </tr>
+        <tr *ngFor="let item of category">
+          <td>{{item.category_id}}</td>
+          <td>{{item.category_name}}</td>
+        </tr> 
+      </table>
+    
+  </div>
+  <div id="snackbar">Product Added</div>
+  <div id="snackbar1">Product Already exists</div>
+  
+</body>
+</html>
+
+
